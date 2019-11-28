@@ -100,3 +100,6 @@ lint/tmp/
 # lint/reports/
 
 .settings/
+
+# apikeys
+apikey.properties
