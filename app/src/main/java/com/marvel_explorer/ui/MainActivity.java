@@ -1,8 +1,9 @@
-package com.marvel_explorer;
+package com.marvel_explorer.ui;
 
 import android.os.Bundle;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.marvel_explorer.R;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
