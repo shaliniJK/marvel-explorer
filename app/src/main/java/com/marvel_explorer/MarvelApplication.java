@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.marvel_explorer.di.ApplicationComponent;
 import com.marvel_explorer.di.DaggerApplicationComponent;
+import com.marvel_explorer.di.NetworkModule;
 
 public class MarvelApplication extends Application {
 
@@ -14,5 +15,6 @@ public class MarvelApplication extends Application {
         super.onCreate();
 
         sAppComponent = DaggerApplicationComponent.create();
+
     }
 }
