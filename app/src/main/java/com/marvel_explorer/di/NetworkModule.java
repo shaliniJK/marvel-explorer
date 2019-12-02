@@ -2,9 +2,12 @@ package com.marvel_explorer.di;
 
 import com.facebook.stetho.okhttp3.StethoInterceptor;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.marvel_explorer.data.model.marvelentitytypes.MarvelResource;
 import com.marvel_explorer.data.services.MarvelRetrofitService;
 import com.marvel_explorer.data.services.MarvelService;
 import com.marvel_explorer.utils.APIRequestInterceptor;
+import com.marvel_explorer.utils.JsonDeserializerWithInheritance;
 
 import javax.inject.Singleton;
 
@@ -39,7 +42,11 @@ public class NetworkModule {
     @Provides
     @Singleton
     public Gson provideGson() {
-        return new Gson();
+        GsonBuilder builder = new GsonBuilder();
+        builder.registerTypeAdapter(MarvelResource.class, new JsonDeserializerWithInheritance<MarvelResource>());
+        Gson gson = builder.create();
+
+        return gson;
     }
 
 }

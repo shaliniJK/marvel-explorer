@@ -14,7 +14,7 @@ import retrofit2.http.Query;
  */
 public interface MarvelService {
 
-//    static int FETCH_LIMIT = 100;
+    static int FETCH_LIMIT = 100;
 
     // characters list
     @GET("characters")
