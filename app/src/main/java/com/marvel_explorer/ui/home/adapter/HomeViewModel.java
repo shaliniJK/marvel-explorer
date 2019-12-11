@@ -1,4 +1,4 @@
-package com.marvel_explorer.ui.home;
+package com.marvel_explorer.ui.home.adapter;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

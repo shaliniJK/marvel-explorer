@@ -1,4 +1,4 @@
-package com.marvel_explorer.ui.notifications;
+package com.marvel_explorer.ui.favorites;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

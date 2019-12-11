@@ -1,4 +1,4 @@
-package com.marvel_explorer.ui.notifications;
+package com.marvel_explorer.ui.favorites;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

@@ -1,4 +1,4 @@
-package com.marvel_explorer.ui.search;
+package com.marvel_explorer.ui.search.adapter;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;

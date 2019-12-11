@@ -1,4 +1,4 @@
-package com.marvel_explorer.ui.search;
+package com.marvel_explorer.ui.search.fragment;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -13,6 +13,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.marvel_explorer.R;
+import com.marvel_explorer.ui.search.adapter.SearchViewModel;
 
 public class SearchFragment extends Fragment {
 
