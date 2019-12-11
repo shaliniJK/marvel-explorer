@@ -1,4 +1,4 @@
-package com.marvel_explorer.ui.dashboard;
+package com.marvel_explorer.ui.notifications;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,17 +14,17 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.marvel_explorer.R;
 
-public class DashboardFragment extends Fragment {
+public class FavoritesFragment extends Fragment {
 
-    private DashboardViewModel dashboardViewModel;
+    private FavoritesViewModel mFavoritesViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        dashboardViewModel =
-                ViewModelProviders.of(this).get(DashboardViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_dashboard, container, false);
-        final TextView textView = root.findViewById(R.id.text_dashboard);
-        dashboardViewModel.getText().observe(this, new Observer<String>() {
+        mFavoritesViewModel =
+                ViewModelProviders.of(this).get(FavoritesViewModel.class);
+        View root = inflater.inflate(R.layout.fragment_favorites, container, false);
+        final TextView textView = root.findViewById(R.id.text_notifications);
+        mFavoritesViewModel.getText().observe(this, new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);

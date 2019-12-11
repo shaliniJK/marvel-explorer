@@ -1,4 +1,4 @@
-package com.marvel_explorer.ui.notifications;
+package com.marvel_explorer.ui.search;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,17 +14,17 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.marvel_explorer.R;
 
-public class NotificationsFragment extends Fragment {
+public class SearchFragment extends Fragment {
 
-    private NotificationsViewModel notificationsViewModel;
+    private SearchViewModel mSearchViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        notificationsViewModel =
-                ViewModelProviders.of(this).get(NotificationsViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_notifications, container, false);
-        final TextView textView = root.findViewById(R.id.text_notifications);
-        notificationsViewModel.getText().observe(this, new Observer<String>() {
+        mSearchViewModel =
+                ViewModelProviders.of(this).get(SearchViewModel.class);
+        View root = inflater.inflate(R.layout.fragment_search, container, false);
+        final TextView textView = root.findViewById(R.id.text_search);
+        mSearchViewModel.getText().observe(this, new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);
