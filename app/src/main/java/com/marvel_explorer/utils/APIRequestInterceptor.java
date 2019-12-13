@@ -25,6 +25,10 @@ public class APIRequestInterceptor implements Interceptor {
     private static final String PARAM_APIKEY    = "apikey";
     private static final String PARAM_HASH      = "hash";
 
+    public APIRequestInterceptor() {
+        super();
+    }
+
 
     /**
      * Modifies the request url to include the additional query parameters required by the Marvel Comics API
