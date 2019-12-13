@@ -25,11 +25,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
 @Module
 public class NetworkModule {
 
-
     @Provides
     @Singleton
-    public MarvelService provideMarvelService() {
-        return MarvelRetrofitService.getMarvelService();
+    public MarvelService provideMarvelService(APIRequestInterceptor interceptor, Gson gson) {
+        return MarvelRetrofitService.getMarvelService(interceptor, gson);
     }
 
 

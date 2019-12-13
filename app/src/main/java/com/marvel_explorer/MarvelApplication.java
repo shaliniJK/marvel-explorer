@@ -4,11 +4,10 @@ import android.app.Application;
 
 import com.marvel_explorer.di.ApplicationComponent;
 import com.marvel_explorer.di.DaggerApplicationComponent;
-import com.marvel_explorer.di.NetworkModule;
 
 public class MarvelApplication extends Application {
 
-    private static ApplicationComponent sAppComponent;
+    private ApplicationComponent sAppComponent;
 
     @Override
     public void onCreate() {
@@ -16,5 +15,10 @@ public class MarvelApplication extends Application {
 
         sAppComponent = DaggerApplicationComponent.create();
 
+        sAppComponent.inject(this);
+    }
+
+    public ApplicationComponent getAppComponent() {
+        return sAppComponent;
     }
 }
