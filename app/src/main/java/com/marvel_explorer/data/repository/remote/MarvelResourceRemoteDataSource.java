@@ -34,19 +34,39 @@ public class MarvelResourceRemoteDataSource {
         mMarvelService = marvelService;
     }
 
-    public Single<List<Character>> getCharactersListResponse(String keyword) {
-        return mMarvelService.listCharacters(keyword, MarvelService.FETCH_LIMIT)
+    public Single<List<Character>> getAllCharactersListResponse() {
+        return mMarvelService.listAllCharacters(MarvelService.FETCH_LIMIT)
                 .map(new Function<MarvelResourceResponse, List<Character>>() {
                     @Override
                     public List<Character> apply(MarvelResourceResponse marvelResourceResponse) throws Exception {
-
                         List<MarvelResource> marvelResources = marvelResourceResponse.getData().getMarvelResources();
                         List<Character> characters = new ArrayList<>();
 
                         for (MarvelResource marvelResource : marvelResources) {
                             String characterJson = mGson.toJson(marvelResource);
+                            Character character  = mGson.fromJson(characterJson, Character.class);
 
-                            Character character = mGson.fromJson(characterJson, Character.class);
+                            characters.add(character);
+                        }
+
+                        return characters;
+                    }
+                });
+
+    }
+
+
+    public Single<List<Character>> getCharactersListResponse(String keyword) {
+        return mMarvelService.listCharacters(keyword, MarvelService.FETCH_LIMIT)
+                .map(new Function<MarvelResourceResponse, List<Character>>() {
+                    @Override
+                    public List<Character> apply(MarvelResourceResponse marvelResourceResponse) throws Exception {
+                        List<MarvelResource> marvelResources = marvelResourceResponse.getData().getMarvelResources();
+                        List<Character> characters = new ArrayList<>();
+
+                        for (MarvelResource marvelResource : marvelResources) {
+                            String characterJson = mGson.toJson(marvelResource);
+                            Character character  = mGson.fromJson(characterJson, Character.class);
 
                             characters.add(character);
                         }

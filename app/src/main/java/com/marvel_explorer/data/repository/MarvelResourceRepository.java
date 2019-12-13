@@ -6,14 +6,18 @@ import com.marvel_explorer.data.model.marvelentitytypes.Creator;
 
 import java.util.List;
 
-import io.reactivex.Flowable;
+import javax.inject.Singleton;
+
 import io.reactivex.Single;
 
 /**
  *
  * @author koodun
  */
+@Singleton
 public interface MarvelResourceRepository {
+
+    Single<List<Character>> getAllCharactersListResponse();
 
     Single<List<Character>> getCharactersListResponse(String keyword);
 

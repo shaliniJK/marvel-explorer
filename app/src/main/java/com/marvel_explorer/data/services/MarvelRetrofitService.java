@@ -23,13 +23,17 @@ public class MarvelRetrofitService {
 
     private static Retrofit retrofit;
 
-    @Inject
-    APIRequestInterceptor apiRequestInterceptor;
+    private static MarvelRetrofitService sMarvelRetrofitService;
+
+    private APIRequestInterceptor apiRequestInterceptor;
+
+    private Gson gson;
 
     @Inject
-    Gson gson;
+    public MarvelRetrofitService(APIRequestInterceptor apiRequestInterceptor, Gson gson) {
 
-    public MarvelRetrofitService() {
+        apiRequestInterceptor = apiRequestInterceptor;
+        gson = gson;
 
         HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
         logging.level(HttpLoggingInterceptor.Level.BODY);
@@ -48,8 +52,12 @@ public class MarvelRetrofitService {
                 .build();
     }
 
-    public static MarvelService getMarvelService() {
 
+
+    public static MarvelService getMarvelService(APIRequestInterceptor interceptor, Gson gson) {
+        if (sMarvelRetrofitService == null) {
+            sMarvelRetrofitService = new MarvelRetrofitService(interceptor, gson);
+        }
         return retrofit.create(MarvelService.class);
     }
 

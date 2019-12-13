@@ -18,6 +18,11 @@ public interface MarvelService {
 
     // characters list
     @GET("characters")
+    Single<MarvelResourceResponse> listAllCharacters(@Query("limit") int limit);
+
+
+    // characters list
+    @GET("characters")
     Single<MarvelResourceResponse> listCharacters(
             @Query("nameStartsWith") String keyword,
             @Query("limit") int limit);
