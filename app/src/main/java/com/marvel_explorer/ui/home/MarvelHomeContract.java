@@ -23,16 +23,10 @@ public interface MarvelHomeContract {
 
     interface Presenter {
 
-        void getCharacters();
+        void getAllCharacters();
 
         void addCharacterToFavorites(String characterId);
 
         void removeCharacterFromFavorites(String characterId);
-
-        void attachView(MarvelHomeContract.View view);
-
-        void cancelSubscription();
-
-        void detachView();
     }
 }

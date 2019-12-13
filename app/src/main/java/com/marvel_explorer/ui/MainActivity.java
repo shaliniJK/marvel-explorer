@@ -3,7 +3,9 @@ package com.marvel_explorer.ui;
 import android.os.Bundle;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.marvel_explorer.MarvelApplication;
 import com.marvel_explorer.R;
+import com.marvel_explorer.di.ApplicationComponent;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
@@ -15,7 +17,10 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        ((MarvelApplication) getApplication()).getAppComponent().inject(this);
+
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
         BottomNavigationView navView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
