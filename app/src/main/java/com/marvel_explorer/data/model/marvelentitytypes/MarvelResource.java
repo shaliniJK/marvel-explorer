@@ -6,7 +6,7 @@ import com.marvel_explorer.data.model.Urls;
 
 import java.util.List;
 
-public class MarvelResource {
+public class MarvelResource<T> {
 
     @SerializedName("urls")
     private List<Urls> urls;

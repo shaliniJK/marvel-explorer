@@ -1,7 +1,5 @@
 package com.marvel_explorer.ui.home;
 
-import android.util.Log;
-
 import com.marvel_explorer.data.model.marvelentitytypes.Character;
 import com.marvel_explorer.data.repository.MarvelResourceRepository;
 import com.marvel_explorer.di.ApplicationContext;
@@ -47,7 +45,7 @@ public class MarvelHomePresenter extends BasePresenter<MarvelHomeContract.View> 
 
                     @Override
                     public void onError(Throwable e) {
-                        System.err.println(e.getMessage());
+                        e.printStackTrace();
                     }
 
                 })

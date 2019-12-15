@@ -5,7 +5,7 @@ import com.marvel_explorer.data.model.marvelentitytypes.MarvelResource;
 
 import java.util.List;
 
-public class MarvelResourceData
+public class MarvelResourceData<T>
 {
     @SerializedName("total")
     private String total;
@@ -20,7 +20,7 @@ public class MarvelResourceData
     private String count;
 
     @SerializedName("results")
-    private List<MarvelResource> mMarvelResources;
+    private List<T> mMarvelResources;
 
     public String getTotal ()
     {
@@ -42,7 +42,7 @@ public class MarvelResourceData
         return count;
     }
 
-    public List<MarvelResource> getMarvelResources() {
+    public List<T> getMarvelResources() {
         return mMarvelResources;
     }
 

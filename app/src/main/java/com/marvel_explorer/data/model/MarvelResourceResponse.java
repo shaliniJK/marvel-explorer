@@ -2,7 +2,7 @@ package com.marvel_explorer.data.model;
 
 import com.google.gson.annotations.SerializedName;
 
-public class MarvelResourceResponse
+public class MarvelResourceResponse<T>
 {
     @SerializedName("copyright")
     private String copyright;
@@ -11,7 +11,7 @@ public class MarvelResourceResponse
     private String code;
 
     @SerializedName("data")
-    private MarvelResourceData data;
+    private MarvelResourceData<T> data;
 
     @SerializedName("attributionHTML")
     private String attributionHTML;

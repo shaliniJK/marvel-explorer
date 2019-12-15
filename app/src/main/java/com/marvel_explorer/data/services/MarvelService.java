@@ -1,6 +1,7 @@
 package com.marvel_explorer.data.services;
 
 import com.marvel_explorer.data.model.MarvelResourceResponse;
+import com.marvel_explorer.data.model.marvelentitytypes.Character;
 
 import io.reactivex.Single;
 import retrofit2.http.GET;
@@ -18,7 +19,7 @@ public interface MarvelService {
 
     // characters list
     @GET("characters")
-    Single<MarvelResourceResponse> listAllCharacters(@Query("limit") int limit);
+    Single<MarvelResourceResponse<Character>> listAllCharacters(@Query("limit") int limit);
 
 
     // characters list

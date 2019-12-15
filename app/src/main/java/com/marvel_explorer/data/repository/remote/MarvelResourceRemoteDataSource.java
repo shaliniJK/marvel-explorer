@@ -39,22 +39,13 @@ public class MarvelResourceRemoteDataSource {
                 .map(new Function<MarvelResourceResponse, List<Character>>() {
                     @Override
                     public List<Character> apply(MarvelResourceResponse marvelResourceResponse) throws Exception {
-                        List<MarvelResource> marvelResources = marvelResourceResponse.getData().getMarvelResources();
-                        List<Character> characters = new ArrayList<>();
+                        List<Character> marvelResources = marvelResourceResponse.getData().getMarvelResources();
 
-                        for (MarvelResource marvelResource : marvelResources) {
-                            String characterJson = mGson.toJson(marvelResource);
-                            Character character  = mGson.fromJson(characterJson, Character.class);
-
-                            characters.add(character);
-                        }
-
-                        return characters;
+                        return marvelResources;
                     }
                 });
 
     }
-
 
     public Single<List<Character>> getCharactersListResponse(String keyword) {
         return mMarvelService.listCharacters(keyword, MarvelService.FETCH_LIMIT)

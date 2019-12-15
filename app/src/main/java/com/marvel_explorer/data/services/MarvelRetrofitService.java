@@ -4,6 +4,8 @@ import com.facebook.stetho.okhttp3.StethoInterceptor;
 import com.google.gson.Gson;
 import com.marvel_explorer.utils.APIRequestInterceptor;
 
+import java.util.concurrent.TimeUnit;
+
 import javax.inject.Inject;
 
 import okhttp3.OkHttpClient;
@@ -42,6 +44,9 @@ public class MarvelRetrofitService {
                 .addInterceptor(apiRequestInterceptor)
                 .addInterceptor(logging)
                 .addNetworkInterceptor(new StethoInterceptor())
+                .connectTimeout(40, TimeUnit.SECONDS)
+                .readTimeout(40, TimeUnit.SECONDS)
+                .writeTimeout(40, TimeUnit.SECONDS)
                 .build();
 
         retrofit = new Retrofit.Builder()
