@@ -5,4 +5,7 @@
     <string name="title_notifications">Notifications</string>
     <string name="title_favorites">Favorites</string>
     <string name="title_search">Search</string>
+    <string name="thumbnail_preview">thumbnail preview</string>
+    <string name="textview">name</string>
+    <string name="description">description</string>
 </resources>

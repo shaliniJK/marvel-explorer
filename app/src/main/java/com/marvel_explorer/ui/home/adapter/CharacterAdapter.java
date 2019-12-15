@@ -59,7 +59,6 @@ public class CharacterAdapter extends RecyclerView.Adapter<CharacterAdapter.Char
 
         private ImageView thumbnailImageView;
         private TextView nameTextView;
-        private TextView descriptionTextView;
         private ImageButton favoriteButton;
 
         public CharacterViewHolder(@NonNull View itemView) {
@@ -68,7 +67,6 @@ public class CharacterAdapter extends RecyclerView.Adapter<CharacterAdapter.Char
 
             thumbnailImageView  = itemView.findViewById(R.id.thumbnail_imageview);
             nameTextView        = itemView.findViewById(R.id.name_textview);
-            descriptionTextView = itemView.findViewById(R.id.description_textview);
             favoriteButton      = itemView.findViewById(R.id.favorite_button);
 
             setupListeners();
@@ -81,11 +79,9 @@ public class CharacterAdapter extends RecyclerView.Adapter<CharacterAdapter.Char
                     .load(characterViewModel.getThumbnailUrl())
                     .centerCrop()
                     .transition(DrawableTransitionOptions.withCrossFade())
-                    .circleCrop()
                     .into(thumbnailImageView);
 
             nameTextView.setText(characterViewModel.getName());
-            descriptionTextView.setText(characterViewModel.getDescription());
 
         }
 
