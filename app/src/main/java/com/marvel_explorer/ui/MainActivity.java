@@ -5,7 +5,6 @@ import android.os.Bundle;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.marvel_explorer.MarvelApplication;
 import com.marvel_explorer.R;
-import com.marvel_explorer.di.ApplicationComponent;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;

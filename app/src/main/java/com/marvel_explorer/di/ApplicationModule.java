@@ -1,8 +1,7 @@
 package com.marvel_explorer.di;
 
 import android.app.Application;
-
-import javax.inject.Singleton;
+import android.content.Context;
 
 import dagger.Module;
 import dagger.Provides;
@@ -17,8 +16,12 @@ public class ApplicationModule {
     }
 
     @Provides
-    @Singleton
-    Application provideContext() {
+    Context provideContext() {
+        return mApplication;
+    }
+
+    @Provides
+    Application provideApplication() {
         return mApplication;
     }
 

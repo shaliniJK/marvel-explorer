@@ -18,7 +18,8 @@ import io.reactivex.Single;
  */
 public class MarvelResourceLocalDataSource {
 
-    private MarvelDatabase mMarvelDatabase;
+    @Inject
+    MarvelDatabase mMarvelDatabase;
 
     @Inject
     public MarvelResourceLocalDataSource(MarvelDatabase marvelDatabase) {

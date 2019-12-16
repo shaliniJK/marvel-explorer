@@ -1,5 +1,6 @@
 package com.marvel_explorer.di;
 
+import com.marvel_explorer.data.persistence.MarvelDatabase;
 import com.marvel_explorer.data.repository.MarvelResourceDataRepository;
 import com.marvel_explorer.data.repository.MarvelResourceRepository;
 import com.marvel_explorer.data.repository.local.MarvelResourceLocalDataSource;
@@ -28,8 +29,8 @@ public class RepositoryModule {
 
     @Provides
     @Singleton
-    MarvelResourceLocalDataSource provideLocalDataSource() {
-        return new MarvelResourceLocalDataSource();
+    MarvelResourceLocalDataSource provideLocalDataSource(MarvelDatabase marvelDatabase) {
+        return new MarvelResourceLocalDataSource(marvelDatabase);
     }
 
 }
