@@ -3,6 +3,7 @@ package com.marvel_explorer.data.repository;
 import com.marvel_explorer.data.model.marvelentitytypes.Character;
 import com.marvel_explorer.data.model.marvelentitytypes.Comic;
 import com.marvel_explorer.data.model.marvelentitytypes.Creator;
+import com.marvel_explorer.data.persistence.CharacterEntity;
 import com.marvel_explorer.data.repository.local.MarvelResourceLocalDataSource;
 import com.marvel_explorer.data.repository.remote.MarvelResourceRemoteDataSource;
 
@@ -11,6 +12,8 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
+import io.reactivex.Completable;
+import io.reactivex.Flowable;
 import io.reactivex.Single;
 
 /**
@@ -42,6 +45,10 @@ public class MarvelResourceDataRepository implements MarvelResourceRepository {
         return mRemoteDataSource.getCharacterResponse(characterId);
     }
 
+    public Single<List<Comic>> getAllComicsListResponse() {
+        return mRemoteDataSource.getAllComicsListResponse();
+    }
+
     public Single<List<Comic>> getComicsListResponse(String keyword) {
         return mRemoteDataSource.getComicsListResponse(keyword);
     }
@@ -56,6 +63,18 @@ public class MarvelResourceDataRepository implements MarvelResourceRepository {
 
     public Single<Creator> getCreatorResponse(long creatorId) {
         return mRemoteDataSource.getCreatorResponse(creatorId);
+    }
+
+    public Flowable<List<CharacterEntity>> getFavoriteCharacters() {
+        return mlocalDataSource.getFavoriteCharacters();
+    }
+
+    public Completable addToFavorites(String characterId) {
+        return null;
+    }
+
+    public Completable deleteCharacterFromFavorites(String characterId) {
+        return mlocalDataSource.deleteCharacterFromFavorites(characterId);
     }
 
 }

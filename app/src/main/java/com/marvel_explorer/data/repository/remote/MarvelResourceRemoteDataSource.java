@@ -5,7 +5,6 @@ import com.marvel_explorer.data.model.MarvelResourceResponse;
 import com.marvel_explorer.data.model.marvelentitytypes.Character;
 import com.marvel_explorer.data.model.marvelentitytypes.Comic;
 import com.marvel_explorer.data.model.marvelentitytypes.Creator;
-import com.marvel_explorer.data.model.marvelentitytypes.MarvelResource;
 import com.marvel_explorer.data.services.MarvelService;
 
 import java.util.ArrayList;
@@ -44,7 +43,6 @@ public class MarvelResourceRemoteDataSource {
                         return marvelResources;
                     }
                 });
-
     }
 
     public Single<List<Character>> getCharactersListResponse(String keyword) {
@@ -52,26 +50,30 @@ public class MarvelResourceRemoteDataSource {
                 .map(new Function<MarvelResourceResponse, List<Character>>() {
                     @Override
                     public List<Character> apply(MarvelResourceResponse marvelResourceResponse) throws Exception {
-                        List<MarvelResource> marvelResources = marvelResourceResponse.getData().getMarvelResources();
-                        List<Character> characters = new ArrayList<>();
+                        List<Character> marvelResources = marvelResourceResponse.getData().getMarvelResources();
 
-                        for (MarvelResource marvelResource : marvelResources) {
-                            String characterJson = mGson.toJson(marvelResource);
-                            Character character  = mGson.fromJson(characterJson, Character.class);
-
-                            characters.add(character);
-                        }
-
-                        return characters;
+                        return marvelResources;
                     }
                 });
-
     }
 
     public Single<Character> getCharacterResponse(long characterId) {
         return null;
 //        return mMarvelService.getCharacter(characterId);
     }
+
+    public Single<List<Comic>> getAllComicsListResponse() {
+        return mMarvelService.listAllComics(MarvelService.FETCH_LIMIT)
+                .map(new Function<MarvelResourceResponse, List<Comic>>() {
+                    @Override
+                    public List<Comic> apply(MarvelResourceResponse marvelResourceResponse) throws Exception {
+                        List<Comic> marvelResources = marvelResourceResponse.getData().getMarvelResources();
+
+                        return marvelResources;
+                    }
+                });
+    }
+
 
     public Single<List<Comic>> getComicsListResponse(String keyword) {
         return null;
