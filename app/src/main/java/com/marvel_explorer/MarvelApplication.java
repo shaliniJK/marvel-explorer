@@ -15,13 +15,10 @@ public class MarvelApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
-//        sAppComponent = DaggerApplicationComponent.create();
-
         sAppComponent = DaggerApplicationComponent.builder()
                 .applicationModule(new ApplicationModule(this))
                 .databaseModule(new DatabaseModule(this))
                 .build();
-
         sAppComponent.inject(this);
     }
 

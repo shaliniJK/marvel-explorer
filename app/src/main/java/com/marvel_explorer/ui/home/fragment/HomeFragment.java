@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.marvel_explorer.MarvelApplication;
 import com.marvel_explorer.R;
 import com.marvel_explorer.di.ApplicationComponent;
+import com.marvel_explorer.ui.MainActivity;
 import com.marvel_explorer.ui.home.MarvelHomeContract;
 import com.marvel_explorer.ui.home.MarvelHomePresenter;
 import com.marvel_explorer.ui.home.adapter.CharacterActionInterface;
@@ -33,6 +34,7 @@ public class HomeFragment extends Fragment implements MarvelHomeContract.View, C
 
     private CharacterAdapter mCharacterAdapter;
     private RecyclerView mRecyclerView;
+    private RecyclerView.LayoutManager mLayoutManager;
 
     @Inject
     MarvelHomePresenter mPresenter;
@@ -81,6 +83,8 @@ public class HomeFragment extends Fragment implements MarvelHomeContract.View, C
             mCharacterAdapter = new CharacterAdapter();
         }
 
+     //   mLayoutManager = ((MainActivity)getActivity()).getLayoutManager();
+
         mRecyclerView.setAdapter(mCharacterAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
     }
@@ -94,5 +98,7 @@ public class HomeFragment extends Fragment implements MarvelHomeContract.View, C
     public void onCharacterRemovedFromFavorites() {}
 
     public void onFavoriteToggle(String characterId, boolean isFavorite) {}
+
+
 
 }

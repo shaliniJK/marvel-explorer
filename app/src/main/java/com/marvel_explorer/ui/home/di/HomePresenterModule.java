@@ -7,7 +7,6 @@ import com.marvel_explorer.ui.home.MarvelHomePresenter;
 import com.marvel_explorer.ui.home.mapper.CharacterToViewModelMapper;
 
 import javax.inject.Inject;
-import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;

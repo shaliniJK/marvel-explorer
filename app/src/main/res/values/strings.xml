@@ -8,4 +8,5 @@
     <string name="thumbnail_preview">thumbnail preview</string>
     <string name="textview">name</string>
     <string name="description">description</string>
+    <string name="grid_list_switch">grid view</string>
 </resources>
