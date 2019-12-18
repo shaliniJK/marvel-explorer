@@ -14,15 +14,12 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class MainActivity extends AppCompatActivity {
 
     private Toolbar mTopToolbar;
     boolean grid_list_flag = true;
-    private RecyclerView.LayoutManager mLayoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,8 +40,6 @@ public class MainActivity extends AppCompatActivity {
 
         mTopToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mTopToolbar);
-
-        mLayoutManager = new LinearLayoutManager(MainActivity.this);
     }
 
     @Override
@@ -63,26 +58,9 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.grid_list_switch) {
-            if (grid_list_flag) {
-                // Show grid view
-                item.setIcon(R.drawable.ic_grid_on_24px);
-                mLayoutManager =  new GridLayoutManager(MainActivity.this, 2);
-
-            } else {
-                // Show list view
-                item.setIcon(R.drawable.ic_list_24px);
-                mLayoutManager = new LinearLayoutManager(MainActivity.this);
-
-            }
-            grid_list_flag = !grid_list_flag; // toggle value on every click
-
-            return true;
+            return false;
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    public RecyclerView.LayoutManager getLayoutManager() {
-        return mLayoutManager;
     }
 }

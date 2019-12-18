@@ -1,21 +1,23 @@
 package com.marvel_explorer.ui.home.fragment;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.marvel_explorer.MarvelApplication;
 import com.marvel_explorer.R;
 import com.marvel_explorer.di.ApplicationComponent;
-import com.marvel_explorer.ui.MainActivity;
 import com.marvel_explorer.ui.home.MarvelHomeContract;
 import com.marvel_explorer.ui.home.MarvelHomePresenter;
 import com.marvel_explorer.ui.home.adapter.CharacterActionInterface;
@@ -34,7 +36,7 @@ public class HomeFragment extends Fragment implements MarvelHomeContract.View, C
 
     private CharacterAdapter mCharacterAdapter;
     private RecyclerView mRecyclerView;
-    private RecyclerView.LayoutManager mLayoutManager;
+    private boolean grid_list_flag = true;
 
     @Inject
     MarvelHomePresenter mPresenter;
@@ -47,7 +49,7 @@ public class HomeFragment extends Fragment implements MarvelHomeContract.View, C
         DaggerHomePresenterComponent.factory().create(appComponent, new HomePresenterModule(this)).inject(this);
 
         super.onCreate(savedInstanceState);
-
+        setHasOptionsMenu(true);
     }
 
     public View onCreateView(@NonNull LayoutInflater inflater,
@@ -63,9 +65,7 @@ public class HomeFragment extends Fragment implements MarvelHomeContract.View, C
         super.onActivityCreated(savedInstanceState);
 
         mPresenter.attachView(this);
-
         setupRecyclerView();
-
         mPresenter.getAllCharacters();
     }
 
@@ -82,11 +82,35 @@ public class HomeFragment extends Fragment implements MarvelHomeContract.View, C
         if (mCharacterAdapter == null) {
             mCharacterAdapter = new CharacterAdapter();
         }
-
-     //   mLayoutManager = ((MainActivity)getActivity()).getLayoutManager();
-
         mRecyclerView.setAdapter(mCharacterAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.grid_list_switch:
+                if (grid_list_flag) {
+                    // Show grid view
+                    mRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
+                    item.setIcon(R.drawable.ic_list_24px);
+                } else {
+                    // Show list view
+                    mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+                    item.setIcon(R.drawable.ic_grid_on_24px);
+                }
+                grid_list_flag = !grid_list_flag;
+
+                return true;
+            default:
+                break;
+        }
+        return false;
     }
 
     public void displayCharacters(List<CharacterViewModel> characterViewModelList) {
@@ -98,7 +122,5 @@ public class HomeFragment extends Fragment implements MarvelHomeContract.View, C
     public void onCharacterRemovedFromFavorites() {}
 
     public void onFavoriteToggle(String characterId, boolean isFavorite) {}
-
-
 
 }

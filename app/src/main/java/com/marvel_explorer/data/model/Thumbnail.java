@@ -6,6 +6,7 @@ public class Thumbnail
     public static final String SIZE_STANDARD_SMALL = "standard_small";
     public static final String SIZE_STANDARD_FANTASTIC = "standard_fantastic";
     public static final String SIZE_LANDSCAPE_XLARGE = "landscape_xlarge";
+    public static final String SIZE_DETAIL = "detail";
 
     private String path;
 
@@ -38,5 +39,10 @@ public class Thumbnail
     public String getThumbnailUrl() {
         return path + "/" + SIZE_STANDARD_SMALL + "." + extension;
     }
+
+    public String getFullImageUrl() {
+        return path + "/" + SIZE_DETAIL + "." + extension;
+    }
+
 
 }
