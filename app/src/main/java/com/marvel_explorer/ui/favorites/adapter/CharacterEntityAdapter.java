@@ -1,4 +1,4 @@
-package com.marvel_explorer.ui.home.adapter;
+package com.marvel_explorer.ui.favorites.adapter;
 
 import android.graphics.Color;
 import android.view.LayoutInflater;
@@ -8,39 +8,40 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
-
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.marvel_explorer.R;
+import com.marvel_explorer.ui.home.adapter.CharacterViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class CharacterAdapter extends RecyclerView.Adapter<CharacterAdapter.CharacterViewHolder> {
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
+public class CharacterEntityAdapter extends RecyclerView.Adapter<CharacterEntityAdapter.CharacterViewHolder> {
 
     private List<CharacterViewModel> mCharacterViewModels;
-    private CharacterActionInterface mCharacterActionInterface;
+    private FavoritesActionInterface mFavoritesActionInterface;
 
-    public CharacterAdapter(CharacterActionInterface characterActionInterface) {
+    public CharacterEntityAdapter(FavoritesActionInterface favoritesActionInterface) {
+        mFavoritesActionInterface = favoritesActionInterface;
         mCharacterViewModels      = new ArrayList<>();
-        mCharacterActionInterface = characterActionInterface;
     }
 
     @NonNull
     @Override
-    public CharacterViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public CharacterEntityAdapter.CharacterViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.character_item, parent, false);
 
-        CharacterAdapter.CharacterViewHolder characterViewHolder = new CharacterAdapter.CharacterViewHolder(view, mCharacterActionInterface);
+        CharacterEntityAdapter.CharacterViewHolder characterViewHolder = new CharacterEntityAdapter.CharacterViewHolder(view, mFavoritesActionInterface);
 
         return characterViewHolder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CharacterViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull CharacterEntityAdapter.CharacterViewHolder holder, int position) {
         holder.bind(mCharacterViewModels.get(position));
     }
 
@@ -59,16 +60,16 @@ public class CharacterAdapter extends RecyclerView.Adapter<CharacterAdapter.Char
 
         private View mView;
         private CharacterViewModel mViewModel;
-        private CharacterActionInterface mCharacterActionInterface;
+        private FavoritesActionInterface mFavoritesActionInterface;
 
         private ImageView thumbnailImageView;
         private TextView nameTextView;
         private ImageButton favoriteButton;
 
-        public CharacterViewHolder(@NonNull View itemView, CharacterActionInterface characterActionInterface) {
+        public CharacterViewHolder(@NonNull View itemView, FavoritesActionInterface favoritesActionInterface) {
             super(itemView);
             this.mView = itemView;
-            this.mCharacterActionInterface = characterActionInterface;
+            this.mFavoritesActionInterface = favoritesActionInterface;
 
             thumbnailImageView  = itemView.findViewById(R.id.thumbnail_imageview);
             nameTextView        = itemView.findViewById(R.id.name_textview);
@@ -93,20 +94,14 @@ public class CharacterAdapter extends RecyclerView.Adapter<CharacterAdapter.Char
             favoriteButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (mViewModel.isFavorite()) {
-                        favoriteButton.getDrawable().setAlpha(Color.parseColor("#62727b"));
-                    } else {
-                        favoriteButton.getDrawable().setAlpha(Color.parseColor("#37474f"));
-                    }
-                    mCharacterActionInterface.onFavoriteToggle(mViewModel.getId(), mViewModel.isFavorite());
-                    mViewModel.setFavorite(!mViewModel.isFavorite());
+                    mFavoritesActionInterface.onRemoveFavoriteCharacter(mViewModel.getId());
                 }
             });
 
             mView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    mCharacterActionInterface.onItemClicked(mViewModel.getId());
+                    mFavoritesActionInterface.onItemClicked(mViewModel.getId());
                 }
             });
         }

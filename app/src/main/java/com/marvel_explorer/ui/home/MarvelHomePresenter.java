@@ -11,6 +11,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.observers.DisposableCompletableObserver;
 import io.reactivex.observers.DisposableSingleObserver;
 import io.reactivex.schedulers.Schedulers;
 
@@ -52,9 +53,39 @@ public class MarvelHomePresenter extends BasePresenter<MarvelHomeContract.View> 
         );
     }
 
-    public void addCharacterToFavorites(String characterId) {}
+    public void addCharacterToFavorites(String characterId) {
+        mDisposable.add(mRepository.addCharacterToFavorites(characterId)
+        .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new DisposableCompletableObserver() {
+                    @Override
+                    public void onComplete() {
+                        mView.onCharacterAddedToFavorites();
+                    }
 
-    public void removeCharacterFromFavorites(String characterId) {}
+                    @Override
+                    public void onError(Throwable e) {
+                        System.err.println(e.getMessage());
+                    }
+                }));
+    }
+
+    public void removeCharacterFromFavorites(String characterId) {
+        mDisposable.add(mRepository.deleteCharacterFromFavorites(characterId)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(new DisposableCompletableObserver() {
+                    @Override
+                    public void onComplete() {
+                        mView.onCharacterRemovedFromFavorites();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        System.err.println(e.getMessage());
+                    }
+                }));
+    }
 
     public void navigateToCharacterDetails(String characterId) {
         mView.showCharacterDetails(characterId);

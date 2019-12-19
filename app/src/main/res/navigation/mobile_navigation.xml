@@ -19,7 +19,7 @@
 
     <fragment
         android:id="@+id/navigation_favorites"
-        android:name="com.marvel_explorer.ui.favorites.FavoritesFragment"
+        android:name="com.marvel_explorer.ui.favorites.fragment.FavoritesFragment"
         android:label="@string/title_favorites"
         tools:layout="@layout/fragment_favorites" />
 </navigation>

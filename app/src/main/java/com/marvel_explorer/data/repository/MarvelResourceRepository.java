@@ -38,7 +38,7 @@ public interface MarvelResourceRepository {
 
     Flowable<List<CharacterEntity>> getFavoriteCharacters();
 
-    Completable addToFavorites(String characterId);
+    Completable addCharacterToFavorites(String characterId);
 
     Completable deleteCharacterFromFavorites(String characterId);
 

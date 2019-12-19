@@ -30,7 +30,7 @@ public class MarvelResourceLocalDataSource {
         return mMarvelDatabase.mCharacterDAO().getFavoriteCharacters();
     }
 
-    public Completable addToFavorites(CharacterEntity characterEntity) {
+    public Completable addCharacterToFavorites(CharacterEntity characterEntity) {
         return mMarvelDatabase.mCharacterDAO().addToFavorites(characterEntity);
     }
 

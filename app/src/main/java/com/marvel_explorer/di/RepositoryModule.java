@@ -1,6 +1,7 @@
 package com.marvel_explorer.di;
 
 import com.marvel_explorer.data.persistence.MarvelDatabase;
+import com.marvel_explorer.data.persistence.ResourceToResourceEntityMapper;
 import com.marvel_explorer.data.repository.MarvelResourceDataRepository;
 import com.marvel_explorer.data.repository.MarvelResourceRepository;
 import com.marvel_explorer.data.repository.local.MarvelResourceLocalDataSource;
@@ -17,8 +18,8 @@ public class RepositoryModule {
 
     @Provides
     @Singleton
-    MarvelResourceRepository provideMarvelResourceRepository(MarvelResourceLocalDataSource localDataSource, MarvelResourceRemoteDataSource remoteDataSource) {
-        return new MarvelResourceDataRepository(localDataSource, remoteDataSource);
+    MarvelResourceRepository provideMarvelResourceRepository(MarvelResourceLocalDataSource localDataSource, MarvelResourceRemoteDataSource remoteDataSource, ResourceToResourceEntityMapper resourceEntityMapper) {
+        return new MarvelResourceDataRepository(localDataSource, remoteDataSource, resourceEntityMapper);
     }
 
     @Provides
@@ -31,6 +32,12 @@ public class RepositoryModule {
     @Singleton
     MarvelResourceLocalDataSource provideLocalDataSource(MarvelDatabase marvelDatabase) {
         return new MarvelResourceLocalDataSource(marvelDatabase);
+    }
+
+    @Provides
+    @Singleton
+    ResourceToResourceEntityMapper provideResourceToResourceEntityMapper() {
+        return new ResourceToResourceEntityMapper();
     }
 
 }
