@@ -1,6 +1,5 @@
 package com.marvel_explorer.ui.favorites.adapter;
 
-import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -80,6 +79,7 @@ public class CharacterEntityAdapter extends RecyclerView.Adapter<CharacterEntity
 
         void bind(CharacterViewModel characterViewModel) {
             this.mViewModel = characterViewModel;
+            favoriteButton.setImageResource(R.drawable.ic_favorites_red_24dp);
 
             Glide.with(mView)
                     .load(characterViewModel.getThumbnailUrl())

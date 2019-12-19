@@ -80,6 +80,12 @@ public class CharacterAdapter extends RecyclerView.Adapter<CharacterAdapter.Char
         void bind(CharacterViewModel characterViewModel) {
             this.mViewModel = characterViewModel;
 
+            if (mViewModel.isFavorite()) {
+                favoriteButton.setImageResource(R.drawable.ic_favorites_red_24dp);
+            } else {
+                favoriteButton.setImageResource(R.drawable.ic_favorite_border_24px);
+            }
+
             Glide.with(mView)
                     .load(characterViewModel.getThumbnailUrl())
                     .centerCrop()
@@ -93,11 +99,12 @@ public class CharacterAdapter extends RecyclerView.Adapter<CharacterAdapter.Char
             favoriteButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (mViewModel.isFavorite()) {
-                        favoriteButton.getDrawable().setAlpha(Color.parseColor("#62727b"));
+                    if (! mViewModel.isFavorite()) {
+                        favoriteButton.setImageResource(R.drawable.ic_favorites_red_24dp);
                     } else {
-                        favoriteButton.getDrawable().setAlpha(Color.parseColor("#37474f"));
+                        favoriteButton.setImageResource(R.drawable.ic_favorite_border_24px);
                     }
+
                     mCharacterActionInterface.onFavoriteToggle(mViewModel.getId(), mViewModel.isFavorite());
                     mViewModel.setFavorite(!mViewModel.isFavorite());
                 }

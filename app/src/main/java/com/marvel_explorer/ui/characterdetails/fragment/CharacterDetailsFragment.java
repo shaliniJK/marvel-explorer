@@ -126,7 +126,12 @@ public class CharacterDetailsFragment extends Fragment implements CharacterDetai
                 .into(portraitImageView);
 
         nameTextView.setText(character.getName());
-        descriptionTextView.setText(character.getDescription());
+
+        if (character.getDescription().isEmpty()) {
+            descriptionTextView.setText("No description for now!");
+        } else {
+            descriptionTextView.setText(character.getDescription());
+        }
 
     }
 
