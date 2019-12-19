@@ -28,8 +28,11 @@ public class CharacterToViewModelMapper {
     private CharacterViewModel map(Character character) {
         CharacterViewModel characterViewModel = new CharacterViewModel();
 
+        characterViewModel.setId(character.getId());
+        characterViewModel.setDescription(character.getDescription());
         characterViewModel.setName(character.getName());
         characterViewModel.setThumbnailUrl(character.getThumbnail().getFullImageUrl());
+        characterViewModel.setFavorite(character.isFavorite());
 
         return characterViewModel;
     }

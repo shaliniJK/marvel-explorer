@@ -56,4 +56,9 @@ public class MarvelHomePresenter extends BasePresenter<MarvelHomeContract.View> 
 
     public void removeCharacterFromFavorites(String characterId) {}
 
+    public void navigateToCharacterDetails(String characterId) {
+        mView.showCharacterDetails(characterId);
+    }
+
+
 }

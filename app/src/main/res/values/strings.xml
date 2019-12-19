@@ -9,4 +9,5 @@
     <string name="textview">name</string>
     <string name="description">description</string>
     <string name="grid_list_switch">grid view</string>
+    <string name="back">back</string>
 </resources>

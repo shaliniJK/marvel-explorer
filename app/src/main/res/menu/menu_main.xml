@@ -6,4 +6,11 @@
         android:icon="@drawable/ic_grid_on_24px"
         android:title="@string/grid_list_switch"
         app:showAsAction="ifRoom"/>
+
+    <item
+        android:id="@+id/back_button"
+        android:icon="@drawable/ic_arrow_back_ios_24px"
+        android:title="@string/back"
+        app:showAsAction="never"
+    />
 </menu>

@@ -20,9 +20,11 @@ import java.util.List;
 public class CharacterAdapter extends RecyclerView.Adapter<CharacterAdapter.CharacterViewHolder> {
 
     private List<CharacterViewModel> mCharacterViewModels;
+    private CharacterActionInterface mCharacterActionInterface;
 
-    public CharacterAdapter() {
-        mCharacterViewModels = new ArrayList<>();
+    public CharacterAdapter(CharacterActionInterface characterActionInterface) {
+        mCharacterViewModels      = new ArrayList<>();
+        mCharacterActionInterface = characterActionInterface;
     }
 
     @NonNull
@@ -31,7 +33,7 @@ public class CharacterAdapter extends RecyclerView.Adapter<CharacterAdapter.Char
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.character_item, parent, false);
 
-        CharacterViewHolder characterViewHolder = new CharacterViewHolder(view);
+        CharacterViewHolder characterViewHolder = new CharacterViewHolder(view, mCharacterActionInterface);
 
         return characterViewHolder;
     }
@@ -56,14 +58,16 @@ public class CharacterAdapter extends RecyclerView.Adapter<CharacterAdapter.Char
 
         private View mView;
         private CharacterViewModel mViewModel;
+        private CharacterActionInterface mCharacterActionInterface;
 
         private ImageView thumbnailImageView;
         private TextView nameTextView;
         private ImageButton favoriteButton;
 
-        public CharacterViewHolder(@NonNull View itemView) {
+        public CharacterViewHolder(@NonNull View itemView, CharacterActionInterface characterActionInterface) {
             super(itemView);
             this.mView = itemView;
+            this.mCharacterActionInterface = characterActionInterface;
 
             thumbnailImageView  = itemView.findViewById(R.id.thumbnail_imageview);
             nameTextView        = itemView.findViewById(R.id.name_textview);
@@ -82,9 +86,27 @@ public class CharacterAdapter extends RecyclerView.Adapter<CharacterAdapter.Char
                     .into(thumbnailImageView);
 
             nameTextView.setText(characterViewModel.getName());
-
         }
 
-        private void setupListeners() {}
+        private void setupListeners() {
+            favoriteButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+//                    if (mViewModel.isFavorite()) {
+//                        favoriteButton.getDrawable().setAlpha(Color.parseColor("#62727b"));
+//                    } else {
+//                        favoriteButton.getDrawable().setAlpha(Color.parseColor("#ffffff"));
+//                    }
+                    mCharacterActionInterface.onFavoriteToggle(mViewModel.getId(), mViewModel.isFavorite());
+                }
+            });
+
+            mView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mCharacterActionInterface.onItemClicked(mViewModel.getId());
+                }
+            });
+        }
     }
 }

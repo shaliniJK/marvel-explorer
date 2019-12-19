@@ -19,6 +19,8 @@ public interface MarvelHomeContract {
         void onCharacterAddedToFavorites();
 
         void onCharacterRemovedFromFavorites();
+
+        void showCharacterDetails(String characterId);
     }
 
     interface Presenter {
@@ -28,5 +30,7 @@ public interface MarvelHomeContract {
         void addCharacterToFavorites(String characterId);
 
         void removeCharacterFromFavorites(String characterId);
+
+        void navigateToCharacterDetails(String characterId);
     }
 }

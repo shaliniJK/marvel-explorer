@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.marvel_explorer.MarvelApplication;
 import com.marvel_explorer.R;
 import com.marvel_explorer.di.ApplicationComponent;
+import com.marvel_explorer.ui.characterdetails.fragment.CharacterDetailsFragment;
 import com.marvel_explorer.ui.home.MarvelHomeContract;
 import com.marvel_explorer.ui.home.MarvelHomePresenter;
 import com.marvel_explorer.ui.home.adapter.CharacterActionInterface;
@@ -69,7 +70,6 @@ public class HomeFragment extends Fragment implements MarvelHomeContract.View, C
         mPresenter.getAllCharacters();
     }
 
-
     @Override
     public void onDestroy() {
         super.onDestroy();
@@ -80,7 +80,7 @@ public class HomeFragment extends Fragment implements MarvelHomeContract.View, C
         mRecyclerView = mRootView.findViewById(R.id.recyclerView);
 
         if (mCharacterAdapter == null) {
-            mCharacterAdapter = new CharacterAdapter();
+            mCharacterAdapter = new CharacterAdapter(this);
         }
         mRecyclerView.setAdapter(mCharacterAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -89,6 +89,7 @@ public class HomeFragment extends Fragment implements MarvelHomeContract.View, C
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
+        menu.findItem(R.id.back_button).setVisible(false);
     }
 
     @Override
@@ -107,6 +108,9 @@ public class HomeFragment extends Fragment implements MarvelHomeContract.View, C
                 grid_list_flag = !grid_list_flag;
 
                 return true;
+            case R.id.back_button:
+
+                return false;
             default:
                 break;
         }
@@ -121,6 +125,25 @@ public class HomeFragment extends Fragment implements MarvelHomeContract.View, C
 
     public void onCharacterRemovedFromFavorites() {}
 
-    public void onFavoriteToggle(String characterId, boolean isFavorite) {}
+    public void onFavoriteToggle(String characterId, boolean isFavorite) {
+        if (isFavorite) {
+            mPresenter.removeCharacterFromFavorites(characterId);
+        } else {
+            mPresenter.addCharacterToFavorites(characterId);
+        }
+    }
+
+    public void onItemClicked(String characterId) {
+        mPresenter.navigateToCharacterDetails(characterId);
+    }
+
+    public void showCharacterDetails(String characterId) {
+
+        CharacterDetailsFragment characterDetailsFragment = new CharacterDetailsFragment();
+        getActivity().getSupportFragmentManager().beginTransaction()
+                .replace(((ViewGroup)getView().getParent()).getId(), characterDetailsFragment, characterId)
+                .addToBackStack(null)
+                .commit();
+    }
 
 }
