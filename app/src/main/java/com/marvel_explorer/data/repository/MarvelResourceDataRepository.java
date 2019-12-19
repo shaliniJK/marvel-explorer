@@ -41,7 +41,7 @@ public class MarvelResourceDataRepository implements MarvelResourceRepository {
         return mRemoteDataSource.getCharactersListResponse(keyword);
     }
 
-    public Single<Character> getCharacterResponse(long characterId) {
+    public Single<Character> getCharacterResponse(String characterId) {
         return mRemoteDataSource.getCharacterResponse(characterId);
     }
 
@@ -53,7 +53,7 @@ public class MarvelResourceDataRepository implements MarvelResourceRepository {
         return mRemoteDataSource.getComicsListResponse(keyword);
     }
 
-    public Single<Comic> getComicResponse(long comicId) {
+    public Single<Comic> getComicResponse(String comicId) {
         return mRemoteDataSource.getComicResponse(comicId);
     }
 
@@ -61,7 +61,7 @@ public class MarvelResourceDataRepository implements MarvelResourceRepository {
         return mRemoteDataSource.getCreatorsListResponse(keyword);
     }
 
-    public Single<Creator> getCreatorResponse(long creatorId) {
+    public Single<Creator> getCreatorResponse(String creatorId) {
         return mRemoteDataSource.getCreatorResponse(creatorId);
     }
 

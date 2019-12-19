@@ -8,36 +8,36 @@ import java.util.List;
 public class MarvelResourceData<T>
 {
     @SerializedName("total")
-    private String total;
+    private int total;
 
     @SerializedName("offset")
-    private String offset;
+    private int offset;
 
     @SerializedName("limit")
-    private String limit;
+    private int limit;
 
     @SerializedName("count")
-    private String count;
+    private int count;
 
     @SerializedName("results")
     private List<T> mMarvelResources;
 
-    public String getTotal ()
+    public int getTotal ()
     {
         return total;
     }
 
-    public String getOffset ()
+    public int getOffset ()
     {
         return offset;
     }
 
-    public String getLimit ()
+    public int getLimit ()
     {
         return limit;
     }
 
-    public String getCount ()
+    public int getCount ()
     {
         return count;
     }

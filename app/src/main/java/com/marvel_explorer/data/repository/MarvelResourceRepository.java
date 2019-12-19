@@ -24,17 +24,17 @@ public interface MarvelResourceRepository {
 
     Single<List<Character>> getCharactersListResponse(String keyword);
 
-    Single<Character> getCharacterResponse(long characterId);
+    Single<Character> getCharacterResponse(String characterId);
 
     Single<List<Comic>> getAllComicsListResponse();
 
     Single<List<Comic>> getComicsListResponse(String keyword);
 
-    Single<Comic> getComicResponse(long comicId);
+    Single<Comic> getComicResponse(String comicId);
 
     Single<List<Creator>> getCreatorsListResponse(String keyword);
 
-    Single<Creator> getCreatorResponse(long creatorId);
+    Single<Creator> getCreatorResponse(String creatorId);
 
     Flowable<List<CharacterEntity>> getFavoriteCharacters();
 

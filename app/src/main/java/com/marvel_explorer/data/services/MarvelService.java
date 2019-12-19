@@ -31,7 +31,7 @@ public interface MarvelService {
 
     // character by id
     @GET("characters/{characterId}")
-    Single<MarvelResourceResponse<Character>> getCharacter(@Path("characterId") long characterId);
+    Single<MarvelResourceResponse<Character>> getCharacter(@Path("characterId") String characterId);
 
     // all comics list
     @GET("comics")
@@ -45,7 +45,7 @@ public interface MarvelService {
 
     // comic by id
     @GET("comics/{comicId}")
-    Single<MarvelResourceResponse<Comic>> getComic(@Path("comicId") long comicId);
+    Single<MarvelResourceResponse<Comic>> getComic(@Path("comicId") String comicId);
 
     // creators list
     @GET("creators")
@@ -55,7 +55,7 @@ public interface MarvelService {
 
     // creator by id
     @GET("creators/{creatorId}")
-    Single<MarvelResourceResponse<Creator>> getCreator(@Path("creatorId") long creatorId);
+    Single<MarvelResourceResponse<Creator>> getCreator(@Path("creatorId") String creatorId);
 
 
 }

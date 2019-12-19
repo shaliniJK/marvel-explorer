@@ -139,7 +139,7 @@ public class HomeFragment extends Fragment implements MarvelHomeContract.View, C
 
     public void showCharacterDetails(String characterId) {
 
-        CharacterDetailsFragment characterDetailsFragment = new CharacterDetailsFragment();
+        CharacterDetailsFragment characterDetailsFragment = CharacterDetailsFragment.newInstance(characterId);
         getActivity().getSupportFragmentManager().beginTransaction()
                 .replace(((ViewGroup)getView().getParent()).getId(), characterDetailsFragment, characterId)
                 .addToBackStack(null)

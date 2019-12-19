@@ -7,7 +7,6 @@ import com.marvel_explorer.data.model.marvelentitytypes.Comic;
 import com.marvel_explorer.data.model.marvelentitytypes.Creator;
 import com.marvel_explorer.data.services.MarvelService;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -57,9 +56,21 @@ public class MarvelResourceRemoteDataSource {
                 });
     }
 
-    public Single<Character> getCharacterResponse(long characterId) {
-        return null;
-//        return mMarvelService.getCharacter(characterId);
+    public Single<Character> getCharacterResponse(String characterId) {
+        return mMarvelService.getCharacter(characterId)
+                .map(new Function<MarvelResourceResponse<Character>, Character>() {
+                    @Override
+                    public Character apply(MarvelResourceResponse<Character> characterMarvelResourceResponse)
+                            throws Exception {
+                        if (characterMarvelResourceResponse.getData().getCount() == 1) {
+                            List<Character> marvelResources = characterMarvelResourceResponse.getData()
+                                    .getMarvelResources();
+
+                            return marvelResources.get(0);
+                        }
+                        return null;
+                    }
+                });
     }
 
     public Single<List<Comic>> getAllComicsListResponse() {
@@ -74,20 +85,19 @@ public class MarvelResourceRemoteDataSource {
                 });
     }
 
-
     public Single<List<Comic>> getComicsListResponse(String keyword) {
         return null;
     }
 
-    public Single<Comic> getComicResponse(long comicId) {
+    public Single<Comic> getComicResponse(String comicId) {
         return null;
     }
 
-    public Single<List<Creator>> getCreatorsListResponse(String keyword)  {
+    public Single<List<Creator>> getCreatorsListResponse(String keyword) {
         return null;
     }
 
-    public Single<Creator> getCreatorResponse(long creatorId) {
+    public Single<Creator> getCreatorResponse(String creatorId) {
         return null;
     }
 

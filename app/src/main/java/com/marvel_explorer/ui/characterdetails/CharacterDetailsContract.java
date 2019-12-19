@@ -9,6 +9,6 @@ public interface CharacterDetailsContract {
     }
 
     interface Presenter {
-        void fetchCharacter();
+        void fetchCharacter(String characterId);
     }
 }

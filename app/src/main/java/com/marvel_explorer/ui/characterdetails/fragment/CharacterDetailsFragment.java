@@ -7,9 +7,12 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.Toolbar;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.marvel_explorer.MarvelApplication;
 import com.marvel_explorer.R;
 import com.marvel_explorer.data.model.marvelentitytypes.Character;
@@ -24,15 +27,26 @@ import javax.inject.Inject;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 
 public class CharacterDetailsFragment extends Fragment implements CharacterDetailsContract.View {
 
     private View mRootView;
 
+    private static final String ARG_CHARACTER_ID = "arg_character_id";
+
+    private String characterId;
+
     @Inject
     CharacterDetailsPresenter mPresenter;
+
+    public static CharacterDetailsFragment newInstance(String character_id) {
+        CharacterDetailsFragment fragment = new CharacterDetailsFragment();
+        Bundle args = new Bundle();
+        args.putString(ARG_CHARACTER_ID, character_id);
+        fragment.setArguments(args);
+
+        return fragment;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -57,8 +71,18 @@ public class CharacterDetailsFragment extends Fragment implements CharacterDetai
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
+        characterId = retrieveCharacterId(savedInstanceState);
+
         mPresenter.attachView(this);
-        mPresenter.fetchCharacter();
+        mPresenter.fetchCharacter(characterId);
+    }
+
+    private String retrieveCharacterId(Bundle savedInstanceState) {
+        if (savedInstanceState == null) {
+            return getArguments().getString(ARG_CHARACTER_ID, "");
+        } else {
+            return savedInstanceState.getString(ARG_CHARACTER_ID, "");
+        }
     }
 
     @Override
@@ -91,8 +115,19 @@ public class CharacterDetailsFragment extends Fragment implements CharacterDetai
     }
 
     public void displayCharacter(Character character) {
-        Toast toast = Toast.makeText(getContext(), "hello", Toast.LENGTH_SHORT);
-        toast.show();
+        ImageView portraitImageView = mRootView.findViewById(R.id.portrait_imageview);
+        TextView nameTextView = mRootView.findViewById(R.id.name_textview);
+        TextView descriptionTextView = mRootView.findViewById(R.id.description_textview);
+
+        Glide.with(mRootView)
+                .load(character.getThumbnail().getFullImageUrl())
+                .fitCenter()
+                .transition(DrawableTransitionOptions.withCrossFade())
+                .into(portraitImageView);
+
+        nameTextView.setText(character.getName());
+        descriptionTextView.setText(character.getDescription());
+
     }
 
 }
